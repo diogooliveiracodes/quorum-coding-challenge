@@ -1,0 +1,14 @@
+---
+description: When to invoke the PO legislative review skill
+alwaysApply: true
+---
+
+# Product Owner reviews
+
+When the user asks for **PO**, **product owner**, **aceitação**, **go/no-go**, **revisão de plano/tasks/implementação/submission**, or `/po-legislative-review`:
+
+1. Read and follow `.cursor/skills/po-legislative-review/SKILL.md` (and `reference.md`).
+2. Produce the PO Report template (verdict + FR/SC coverage).
+3. Do not start implementing fixes unless the user explicitly asks after the review.
+
+Challenge feature of record: `specs/001-legislative-vote-reports/`.

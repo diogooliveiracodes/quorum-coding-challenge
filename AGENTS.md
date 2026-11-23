@@ -57,6 +57,15 @@ Follow Cursor rules in `.cursor/rules/` (always applied):
 - **TDD:** Red → Green → Refactor; no production behavior without a failing test first.
 - **Runtime:** Python 3.12 + stdlib `csv` only; `pytest` is dev-only.
 
+## Product Owner agent
+
+For acceptance analysis of plans, tasks, implementations, or the submission package, use the project skill:
+
+- `.cursor/skills/po-legislative-review/SKILL.md`
+- Invoke with: PO review / `/po-legislative-review` / go-no-go
+
+The PO validates against FR/SC in `specs/001-legislative-vote-reports/spec.md` and does not implement unless asked after the review.
+
 ## Quality gates
 
 Must pass before considering work done:
