@@ -49,9 +49,29 @@ One row per legislator in the dataset (include legislators with zero votes if pr
 
 Correctness (prove against sample data), structure/readability/extensibility, idiomatic use of the chosen language. No database required.
 
+## Architecture & TDD
+
+Follow Cursor rules in `.cursor/rules/` (always applied):
+
+- **Layers:** `src/domain` (pure) → `src/reports` (use cases) → `src/io` (CSV) → `src/main` (wiring).
+- **TDD:** Red → Green → Refactor; no production behavior without a failing test first.
+- **Runtime:** Python 3.12 + stdlib `csv` only; `pytest` is dev-only.
+
+## Quality gates
+
+Must pass before considering work done:
+
+```bash
+docker compose run --rm test   # or: pip install -r requirements-dev.txt && python -m pytest
+docker compose run --rm app    # smoke
+```
+
+CI: `.github/workflows/ci.yml` (pytest + app smoke on push/PR).
+
 ## Agent conventions
 
-- Do not overwrite input CSVs; write outputs to clearly named files.
+- Do not overwrite input CSVs; write outputs to clearly named files (`output/`).
 - Keep the solution simple and well-tested against the provided dataset before optimizing.
-- Prefer a small readable script or module over heavy frameworks.
+- Prefer a small readable layered module over heavy frameworks.
 - When changing join/count logic, verify both output CSVs and edge cases (missing sponsor, legislators with no votes).
+- Never skip TDD or quality gates to “finish faster.”

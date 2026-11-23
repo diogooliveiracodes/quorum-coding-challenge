@@ -1,0 +1,29 @@
+---
+description: Layered architecture — domain, reports, io, main
+alwaysApply: true
+---
+
+# Architecture (layered, keep it lean)
+
+Keep code in these layers. Do not collapse domain logic into CSV I/O or `main`.
+
+| Layer | Path | Responsibility |
+|-------|------|----------------|
+| Domain | `src/domain/` | Pure models + aggregates (counts, `"Unknown"`). No I/O. |
+| Reports | `src/reports/` | Use cases that build the two report row sets. |
+| IO | `src/io/` | CSV read/write via stdlib `csv` only. |
+| Main | `src/main.py` | Wire paths and call use cases. |
+
+## Rules
+
+- Prefer **composition** and pure functions over inheritance and frameworks.
+- Ports/adapters: swap input source (full CSV vs filtered list) without changing domain.
+- No database, no DI container, no Factory/Singleton/Observer unless clearly justified.
+- Never overwrite input CSVs; write to `output/` with distinct names:
+  - `legislators-support-oppose-count.csv`
+  - `bills-support-oppose-count.csv`
+
+```text
+❌ BAD: parse CSV and count in the same function in main.py
+✅ GOOD: readers → aggregates → report builders → writers
+```

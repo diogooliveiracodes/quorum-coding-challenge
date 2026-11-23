@@ -12,3 +12,14 @@ services:
       - ./src:/app/src:ro
     working_dir: /app
     command: ["python", "-m", "src.main"]
+
+  # Quality gate: TDD suite (pytest is a dev dependency only)
+  test:
+    image: python:3.12-slim
+    working_dir: /app
+    volumes:
+      - ./:/app
+    command:
+      - sh
+      - -c
+      - pip install -q -r requirements-dev.txt && python -m pytest

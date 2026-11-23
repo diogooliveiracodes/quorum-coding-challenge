@@ -1,0 +1,27 @@
+---
+description: Mandatory TDD — Red, Green, Refactor
+alwaysApply: true
+---
+
+# TDD Workflow (mandatory)
+
+Every behavior change follows **Red → Green → Refactor**. No production code without a failing test first.
+
+## Order of work
+
+1. **Domain first** — unit tests for aggregates (Yea/Nay counts, missing sponsor → `"Unknown"`, zero-vote legislators).
+2. **Reports** — unit tests for row schema and contents with in-memory fixtures.
+3. **IO** — CSV round-trip or golden-file checks.
+4. **E2E** — regenerate both outputs from `data/` and assert correctness.
+
+## Rules
+
+- Do not implement feature code before a failing test exists for that behavior.
+- Prefer pure-function tests (no filesystem) for domain/reports; reserve file I/O for io/e2e.
+- When changing join/count logic, cover both report outputs and edge cases.
+- Refactor only while tests stay green.
+
+```text
+❌ BAD: write aggregates.py, then add tests afterward
+✅ GOOD: write failing test → minimal code → refactor
+```

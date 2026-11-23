@@ -1,0 +1,22 @@
+---
+description: Quality gates — tests must pass before claiming done
+alwaysApply: true
+---
+
+# Quality Gates
+
+Do not treat work as complete unless these gates pass:
+
+1. **Unit/integration tests:** `docker compose run --rm test` (or `python -m pytest` with dev deps).
+2. **App smoke:** `docker compose run --rm app` exits 0.
+3. **Inputs intact:** `data/*.csv` unchanged; outputs only under `output/`.
+4. **Spec alignment:** both report CSVs match `specs/001-legislative-vote-reports/spec.md` (all legislators/bills, `"Unknown"` sponsor, zero counts when no votes).
+
+## CI
+
+GitHub Actions workflow `.github/workflows/ci.yml` must stay green on `main` / PRs. Fix failures before pushing follow-ups that depend on broken tests.
+
+```text
+❌ BAD: "implementation done" with failing or missing tests
+✅ GOOD: pytest green + compose app smoke + outputs verified
+```

@@ -53,15 +53,32 @@ python -m src.main
 
 Requires Python 3.10+ (developed against 3.12).
 
+## Quality gates (TDD)
+
+Architecture: layered `domain` → `reports` → `io` → `main`. Development is **test-first** (Red → Green → Refactor). Cursor rules under `.cursor/rules/` enforce this.
+
+```bash
+# Preferred (Docker)
+docker compose run --rm test
+
+# Local
+pip install -r requirements-dev.txt
+python -m pytest
+```
+
+CI runs the same gates on every push/PR (`.github/workflows/ci.yml`).
+
 ## Project layout
 
 ```
 ├── data/                 # Input CSVs (do not modify)
 ├── output/               # Generated report CSVs
-├── src/                  # Application source
+├── src/                  # Application source (layered)
 │   └── main.py           # Entry point
+├── tests/                # pytest suite
+├── .cursor/rules/        # Architecture + TDD + quality rules
 ├── Dockerfile
-├── docker-compose.yml
+├── docker-compose.yml    # services: app, test
 └── README.md
 ```
 
