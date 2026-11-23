@@ -1,4 +1,4 @@
----
+﻿---
 description: "Task list for Legislative Vote Reports implementation"
 ---
 
@@ -28,8 +28,8 @@ description: "Task list for Legislative Vote Reports implementation"
 
 **Purpose**: Package layout for layered architecture (Docker/pytest already exist)
 
-- [ ] T001 Create package directories and `__init__.py` files for `src/domain/`, `src/reports/`, and `src/io/` per plan.md structure
-- [ ] T002 [P] Add empty module stubs `src/domain/models.py`, `src/domain/aggregates.py`, `src/reports/legislators.py`, `src/reports/bills.py`, `src/io/readers.py`, and `src/io/writers.py` ready for TDD
+- [x] T001 Create package directories and `__init__.py` files for `src/domain/`, `src/reports/`, and `src/io/` per plan.md structure
+- [x] T002 [P] Add empty module stubs `src/domain/models.py`, `src/domain/aggregates.py`, `src/reports/legislators.py`, `src/reports/bills.py`, `src/io/readers.py`, and `src/io/writers.py` ready for TDD
 
 ---
 
@@ -39,11 +39,11 @@ description: "Task list for Legislative Vote Reports implementation"
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T003 [P] Write failing unit tests for domain models and vote-type constants (`vote_type` `1` = Yea/support, `2` = Nay/oppose) in `tests/test_models.py`
-- [ ] T004 [P] Write failing unit tests for CSV readers loading legislators, bills (`sponsor_id` required), votes, and vote_results from `data/` in `tests/test_csv_io.py`
-- [ ] T005 Implement frozen dataclasses `Legislator`, `Bill`, `Vote`, `VoteResult` and vote-type constants in `src/domain/models.py` until T003 passes
-- [ ] T006 Implement stdlib `csv` loaders in `src/io/readers.py` (paths under `data/`; IDs as integers after parse) until T004 passes
-- [ ] T007 [P] Implement CSV writers scaffolding in `src/io/writers.py` that only write under `output/` and never mutate `data/` (contracts/csv-reports.md)
+- [x] T003 [P] Write failing unit tests for domain models and vote-type constants (`vote_type` `1` = Yea/support, `2` = Nay/oppose) in `tests/test_models.py`
+- [x] T004 [P] Write failing unit tests for CSV readers loading legislators, bills (`sponsor_id` required), votes, and vote_results from `data/` in `tests/test_csv_io.py`
+- [x] T005 Implement frozen dataclasses `Legislator`, `Bill`, `Vote`, `VoteResult` and vote-type constants in `src/domain/models.py` until T003 passes
+- [x] T006 Implement stdlib `csv` loaders in `src/io/readers.py` (paths under `data/`; IDs as integers after parse) until T004 passes
+- [x] T007 [P] Implement CSV writers scaffolding in `src/io/writers.py` that only write under `output/` and never mutate `data/` (contracts/csv-reports.md)
 
 **Checkpoint**: Foundation ready — user story implementation can begin
 
@@ -59,16 +59,16 @@ description: "Task list for Legislative Vote Reports implementation"
 
 > **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
 
-- [ ] T008 [P] [US1] Write failing unit tests for legislator Yea/Nay aggregation (including zero-vote legislators → counts `0`/`0`) in `tests/test_aggregates.py`
-- [ ] T009 [P] [US1] Write failing unit tests for legislator report row builder schema/columns in `tests/test_legislator_report.py`
-- [ ] T010 [US1] Write failing test that writes/reads `output/legislators-support-oppose-count.csv` with required columns from contracts/csv-reports.md in `tests/test_legislator_report.py`
+- [x] T008 [P] [US1] Write failing unit tests for legislator Yea/Nay aggregation (including zero-vote legislators → counts `0`/`0`) in `tests/test_aggregates.py`
+- [x] T009 [P] [US1] Write failing unit tests for legislator report row builder schema/columns in `tests/test_legislator_report.py`
+- [x] T010 [US1] Write failing test that writes/reads `output/legislators-support-oppose-count.csv` with required columns from contracts/csv-reports.md in `tests/test_legislator_report.py`
 
 ### Implementation for User Story 1
 
-- [ ] T011 [US1] Implement pure `count_legislator_votes` (or equivalent) in `src/domain/aggregates.py` until T008 passes
-- [ ] T012 [US1] Implement `build_legislator_report` in `src/reports/legislators.py` (exactly one row per legislator; columns `id`, `name`, `num_supported_bills`, `num_opposed_bills`) until T009 passes
-- [ ] T013 [US1] Implement `write_legislator_report` in `src/io/writers.py` targeting `output/legislators-support-oppose-count.csv` until T010 passes
-- [ ] T014 [US1] Wire legislator report path in `src/main.py` (load → aggregate → write legislator CSV; keep exit codes per contracts/cli.md)
+- [x] T011 [US1] Implement pure `count_legislator_votes` (or equivalent) in `src/domain/aggregates.py` until T008 passes
+- [x] T012 [US1] Implement `build_legislator_report` in `src/reports/legislators.py` (exactly one row per legislator; columns `id`, `name`, `num_supported_bills`, `num_opposed_bills`) until T009 passes
+- [x] T013 [US1] Implement `write_legislator_report` in `src/io/writers.py` targeting `output/legislators-support-oppose-count.csv` until T010 passes
+- [x] T014 [US1] Wire legislator report path in `src/main.py` (load → aggregate → write legislator CSV; keep exit codes per contracts/cli.md)
 
 **Checkpoint**: User Story 1 fully functional and independently testable (MVP)
 
@@ -84,16 +84,16 @@ description: "Task list for Legislative Vote Reports implementation"
 
 > **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
 
-- [ ] T015 [P] [US2] Write failing unit tests for bill Yea/Nay counts and sponsor resolution (`"Unknown"` when `sponsor_id` unresolved; zero counts when no vote) in `tests/test_aggregates.py`
-- [ ] T016 [P] [US2] Write failing unit tests for bill report row builder in `tests/test_bill_report.py`
-- [ ] T017 [US2] Write failing test that writes/reads `output/bills-support-oppose-count.csv` without touching `data/bills.csv` in `tests/test_bill_report.py`
+- [x] T015 [P] [US2] Write failing unit tests for bill Yea/Nay counts and sponsor resolution (`"Unknown"` when `sponsor_id` unresolved; zero counts when no vote) in `tests/test_aggregates.py`
+- [x] T016 [P] [US2] Write failing unit tests for bill report row builder in `tests/test_bill_report.py`
+- [x] T017 [US2] Write failing test that writes/reads `output/bills-support-oppose-count.csv` without touching `data/bills.csv` in `tests/test_bill_report.py`
 
 ### Implementation for User Story 2
 
-- [ ] T018 [US2] Extend `src/domain/aggregates.py` with bill vote counts + `resolve_primary_sponsor` (name or exactly `"Unknown"`) until T015 passes
-- [ ] T019 [US2] Implement `build_bill_report` in `src/reports/bills.py` (exactly one row per bill; required columns per contracts/csv-reports.md) until T016 passes
-- [ ] T020 [US2] Implement `write_bill_report` in `src/io/writers.py` targeting `output/bills-support-oppose-count.csv` until T017 passes
-- [ ] T021 [US2] Complete `src/main.py` orchestration to generate both reports in one run (CLI contract: exit `0` on success; stderr + non-zero on missing inputs)
+- [x] T018 [US2] Extend `src/domain/aggregates.py` with bill vote counts + `resolve_primary_sponsor` (name or exactly `"Unknown"`) until T015 passes
+- [x] T019 [US2] Implement `build_bill_report` in `src/reports/bills.py` (exactly one row per bill; required columns per contracts/csv-reports.md) until T016 passes
+- [x] T020 [US2] Implement `write_bill_report` in `src/io/writers.py` targeting `output/bills-support-oppose-count.csv` until T017 passes
+- [x] T021 [US2] Complete `src/main.py` orchestration to generate both reports in one run (CLI contract: exit `0` on success; stderr + non-zero on missing inputs)
 
 **Checkpoint**: User Stories 1 AND 2 both work independently via `python -m src.main` / `docker compose run --rm app`
 
@@ -107,13 +107,13 @@ description: "Task list for Legislative Vote Reports implementation"
 
 ### Tests for User Story 3 ⚠️
 
-- [ ] T022 [US3] Write failing e2e test regenerating both outputs from `data/` and asserting sample correctness + inputs unchanged in `tests/test_e2e_sample_data.py` (quickstart.md / SC-001–SC-004)
+- [x] T022 [US3] Write failing e2e test regenerating both outputs from `data/` and asserting sample correctness + inputs unchanged in `tests/test_e2e_sample_data.py` (quickstart.md / SC-001–SC-004)
 
 ### Implementation for User Story 3
 
-- [ ] T023 [US3] Make e2e pass by ensuring `src/main.py` end-to-end path matches contracts; commit generated files under `output/` for submission if required by deliverable policy
-- [ ] T024 [P] [US3] Write `WRITEUP.md` answering: time complexity/tradeoffs; future columns (e.g. voted-on date, co-sponsors); generating CSVs for a filtered legislator/bill list; time spent
-- [ ] T025 [P] [US3] Update `README.md` run instructions to match quickstart.md (Compose app/test, expected output filenames, link to WRITEUP.md)
+- [x] T023 [US3] Make e2e pass by ensuring `src/main.py` end-to-end path matches contracts; commit generated files under `output/` for submission if required by deliverable policy
+- [x] T024 [P] [US3] Write `WRITEUP.md` answering: time complexity/tradeoffs; future columns (e.g. voted-on date, co-sponsors); generating CSVs for a filtered legislator/bill list; time spent
+- [x] T025 [P] [US3] Update `README.md` run instructions to match quickstart.md (Compose app/test, expected output filenames, link to WRITEUP.md)
 
 **Checkpoint**: Full submission package reviewable without extra context
 
@@ -123,9 +123,9 @@ description: "Task list for Legislative Vote Reports implementation"
 
 **Purpose**: Final validation across stories
 
-- [ ] T026 Run full quality gates (`docker compose run --rm test` and `docker compose run --rm app`) and fix any failures
-- [ ] T027 [P] Walk through `specs/001-legislative-vote-reports/quickstart.md` checklist and note any gaps in `WRITEUP.md` or `README.md`
-- [ ] T028 Refactor only while tests stay green (keep domain pure; no runtime third-party deps)
+- [x] T026 Run full quality gates (`docker compose run --rm test` and `docker compose run --rm app`) and fix any failures
+- [x] T027 [P] Walk through `specs/001-legislative-vote-reports/quickstart.md` checklist and note any gaps in `WRITEUP.md` or `README.md`
+- [x] T028 Refactor only while tests stay green (keep domain pure; no runtime third-party deps)
 
 ---
 

@@ -27,6 +27,8 @@ dist/
 build/
 *.egg
 
-# Generated reports (keep directory via .gitkeep)
+# Generated reports (keep directory via .gitkeep; commit deliverable CSVs)
 output/*
 !output/.gitkeep
+!output/legislators-support-oppose-count.csv
+!output/bills-support-oppose-count.csv

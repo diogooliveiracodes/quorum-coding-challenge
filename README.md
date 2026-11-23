@@ -3,7 +3,8 @@
 Join legislative CSVs and produce support/oppose aggregate reports.
 
 **Stack:** Python 3.12 + standard library (`csv` only). No pip dependencies.  
-**Runtime:** Docker Compose (recommended for evaluators).
+**Runtime:** Docker Compose (recommended for evaluators).  
+**Writeup:** [`WRITEUP.md`](WRITEUP.md)
 
 ## Quick start (Docker)
 
@@ -55,7 +56,9 @@ Requires Python 3.10+ (developed against 3.12).
 
 ## Quality gates (TDD)
 
-Architecture: layered `domain` → `reports` → `io` → `main`. Development is **test-first** (Red → Green → Refactor). Cursor rules under `.cursor/rules/` enforce this.
+Architecture: layered `domain` → `reports` → `io` → `main`. Development is **test-first** (Red → Green → Refactor).
+
+Validation walkthrough: [`specs/001-legislative-vote-reports/quickstart.md`](specs/001-legislative-vote-reports/quickstart.md).
 
 ```bash
 # Preferred (Docker)
@@ -73,10 +76,13 @@ CI runs the same gates on every push/PR (`.github/workflows/ci.yml`).
 ```
 ├── data/                 # Input CSVs (do not modify)
 ├── output/               # Generated report CSVs
-├── src/                  # Application source (layered)
+├── src/
+│   ├── domain/           # Pure models + aggregates
+│   ├── reports/          # Use cases (row builders)
+│   ├── io/               # CSV readers/writers
 │   └── main.py           # Entry point
 ├── tests/                # pytest suite
-├── .cursor/rules/        # Architecture + TDD + quality rules
+├── WRITEUP.md            # Challenge reflection answers
 ├── Dockerfile
 ├── docker-compose.yml    # services: app, test
 └── README.md
