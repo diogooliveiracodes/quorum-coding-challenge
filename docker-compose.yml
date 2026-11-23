@@ -1,0 +1,14 @@
+services:
+  app:
+    build: .
+    image: quorum-coding-challenge:latest
+    container_name: quorum-legislative-reports
+    volumes:
+      # Host data overrides image copy so evaluators can swap datasets
+      - ./data:/app/data:ro
+      # Generated CSVs land on the host for inspection
+      - ./output:/app/output
+      # Live source for local iteration without rebuild
+      - ./src:/app/src:ro
+    working_dir: /app
+    command: ["python", "-m", "src.main"]

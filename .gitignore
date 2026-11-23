@@ -26,3 +26,7 @@ Thumbs.db
 dist/
 build/
 *.egg
+
+# Generated reports (keep directory via .gitkeep)
+output/*
+!output/.gitkeep
